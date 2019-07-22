@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body_block %}
+    <div class="container">
+        <div class="jumbotron">
+   <h2>SECTION PROPERTIES PAGE</h2>
+   <form method="POST">
+        {{ form.as_p}}
+        {% csrf_token %}
+        <input type="submit" value='Submit'>
+
+   </form>
+    
+</div>
+<h1>Area = {{ result1 }} mm2</h1>
+<h1>Principal moment x-x is: {{ result2 }} mm^4</h1>
+</div>
+{% endblock %}

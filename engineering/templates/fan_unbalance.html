@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block body_block %}
+    <!-- <div class="container">
+        <div class="jumbotron"> -->
+            
+   <!-- <h1>FAN UNBALANCE</h1> 
+   <form class="form-group row" method="POST">
+    <div class="col-sm-10"> -->
+      <form method="POST" novalidate>
+          <div class="row">
+              <div class="col-6">
+                 {{ form.balance_grade|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                  {{ form.impeller_mass|as_crispy_field }}
+               </div>
+               <div class="col-6">
+                  {{ form.fan_speed|as_crispy_field }}
+               </div>
+               <div class="col-6">
+                  {{ form.backplate_dia|as_crispy_field }}
+               </div>
+        {% csrf_token %}
+      <div class="col-sm-10">
+          <button type="submit" class="btn btn-success">Submit</button>      <!-- </div>
+    </div> -->
+   
+   </form>
+    
+</div>
+<h2>Permissible Residual Unbalance: {{ result1 }}</h2>
+<h2>Max: Patch Area:  {{ result2 }}</h2>
+</div>
+{% endblock %}
