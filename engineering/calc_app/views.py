@@ -5,8 +5,11 @@ from lib.fan_unbalance import Fan
 from . models import Rectangle, FanUnbalance
 
 # Create your views here.
+
+
 def index(request):
     return render(request, 'index.html')
+
 
 def rectangle(request):
 
@@ -14,43 +17,46 @@ def rectangle(request):
 
     if request.method == 'POST':
         form = RectangleForm(request.POST)
-        
+
         if form.is_valid():
             form.save(commit=True)
-            x=float(form.cleaned_data['rec_width'])
-            y=float(form.cleaned_data['rec_height'])
+            x = float(form.cleaned_data['rec_width'])
+            y = float(form.cleaned_data['rec_height'])
 
-            arta =Rect(x,y)
+            arta = Rect(x, y)
             result1 = arta.area()
-            result2 = round(arta.p_moment(),2)
+            result2 = round(arta.p_moment(), 2)
+            result3 = "Area = "
+            result4 = "Principal Moment of Inertia = "
 
-            return render(request, 'section_prop.html', {'form':form, 'result1':result1, 'result2':result2})
+            return render(request, 'section_prop.html', {'form': form, 'result1': result1, 'result2': result2, 'result3': result3, 'result4': result4})
         else:
             print('Form Invalid')
-    
-    return render(request,'section_prop.html',{'form':form})
+
+    return render(request, 'section_prop.html', {'form': form})
+
 
 def fan_unbalance(request):
     form = FanUnbalanceForm()
 
     if request.method == 'POST':
         form = FanUnbalanceForm(request.POST)
-        
+
         if form.is_valid():
             form.save(commit=True)
-            A=float(form.cleaned_data['balance_grade'])
-            B=float(form.cleaned_data['impeller_mass'])
-            C=float(form.cleaned_data['fan_speed'])
-            D=float(form.cleaned_data['backplate_dia'])
+            A = float(form.cleaned_data['balance_grade'])
+            B = float(form.cleaned_data['impeller_mass'])
+            C = float(form.cleaned_data['fan_speed'])
+            D = float(form.cleaned_data['backplate_dia'])
 
-            fan =Fan(A,B,C,D)
+            fan = Fan(A, B, C, D)
             result1 = fan.pru()
             result2 = fan.patch_area()
+            result3 = "Premissable Residual Unbalance = "
+            result4 = "Max. Patch Area = "
 
-            return render(request, 'fan_unbalance.html', {'form':form, 'result1':result1, 'result2':result2})
+            return render(request, 'fan_unbalance.html', {'form': form, 'result1': result1, 'result2': result2, 'result3': result3, 'result4': result4})
         else:
             print('Form Invalid')
-    
-    return render(request,'fan_unbalance.html',{'form':form})
 
-
+    return render(request, 'fan_unbalance.html', {'form': form})
